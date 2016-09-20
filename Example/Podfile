@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AEAssistant_Example' do
+  pod 'AEAssistant', :path => '../'
+
+  target 'AEAssistant_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
