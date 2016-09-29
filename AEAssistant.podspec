@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AEAssistant'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'A short description of AEAssistant.'
 
 # This description is used to generate tags and improve search results.
@@ -38,12 +38,7 @@ Pod::Spec.new do |s|
   # s.dependency 'AFNetworking', '~> 2.3'
   
     s.dependency 'AFNetworking', '~> 3.1.0'
-    s.dependency 'DACircularProgress', '~> 2.3.1'
     s.dependency 'GTMBase64', '~> 1.0.0'
-    s.dependency 'MBProgressHUD', '~> 0.9.0'
     s.dependency 'RegexKitLite', '~> 4.0'
-    s.dependency 'SDWebImage', '~> 3.8.1'
-    s.dependency 'SFHFKeychainUtils', '~> 0.0.1'
-    s.dependency 'SSZipArchive', '~> 1.4'
 
 end

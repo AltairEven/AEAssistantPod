@@ -1,0 +1,6 @@
+framework module Pods_AEAssistant_Tests {
+  umbrella header "Pods-AEAssistant_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

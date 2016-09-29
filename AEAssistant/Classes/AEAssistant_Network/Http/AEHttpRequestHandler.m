@@ -204,10 +204,12 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     
     //请求时间置零
     _requestDurationTime = 0;
+    NSURLRequest *request = [self builtHttpRequest];
+    NSStringEncoding stringEncoding = [self configStringEncoding];
     [self logBeforeRequest];
     self.startTime = [NSDate date];
     
-    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:[weakSelf builtHttpRequest] stringEncoding:[weakSelf configStringEncoding] parameter:weakSelf.originalParam constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:weakSelf.originalParam constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFormData:data name:@"commentImage.jpg"];
     } success:^(NSURLRequest *request, id responseObject) {
         
@@ -225,71 +227,6 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
         }
         
         success(weakSelf, responseObject);
-    } failure:^(NSURLRequest *request, NSError *error) {
-        weakSelf.endTime = [NSDate date];
-        NSNumber *logoutNumber = [weakSelf configLogoutErrorNumber];
-        if (logoutNumber && error.code == [logoutNumber integerValue]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHandledServerResponsedLogoutNotification object:error];
-        }
-        if (failure) {
-            failure(weakSelf, error);
-        }
-        if (errorBlock) {
-            errorBlock(error);
-        }
-        if ([weakSelf configDisplayDebugInfo]) {
-            NSLog(@"duratnion:%f, error description:%@", weakSelf.requestDurationTime, [error localizedDescription]);
-        }
-    }];
-    [self.requestTask resume];
-}
-
-- (void)downloadImageWithSuccess:(void (^)(AEHttpRequestHandler *, UIImage *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
-    __weak typeof(self) weakSelf = self;
-    NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
-    
-    if (![[AEReachability sharedInstance] isNetworkStatusOK]) {
-        NSError *error = [NSError errorWithDomain:@"Http request client. Network status not ok." code:-1 userInfo:nil];
-        if (failure) {
-            failure(weakSelf, error);
-        }
-        if (errorBlock) {
-            errorBlock(error);
-        }
-        return;
-    }
-    if (!self.urlString || [self.urlString isEqualToString:@""]) {
-        NSError *error = [NSError errorWithDomain:@"Http request client. Request content not valid" code:-2 userInfo:nil];
-        if (failure) {
-            failure(weakSelf, error);
-        }
-        if (errorBlock) {
-            errorBlock(error);
-        }
-        return;
-    }
-    
-    //请求时间置零
-    _requestDurationTime = 0;
-    [self logBeforeRequest];
-    self.startTime = [NSDate date];
-    
-    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:[weakSelf builtHttpRequest] stringEncoding:[weakSelf configStringEncoding] parameter:weakSelf.originalParam success:^(NSURLRequest *request, id responseObject) {
-        weakSelf.endTime = [NSDate date];
-        
-        if ([weakSelf configDisplayDebugInfo]) {
-            NSLog(@"duration:%f, response:%@", weakSelf.requestDurationTime, [NSString jsonFromObject:responseObject]);
-        }
-        NSError *error  = [weakSelf configValidResponse:responseObject];
-        if (error) {
-            if (failure) {
-                failure(weakSelf, error);
-            }
-            return ;
-        }
-        if (success) {
-            success(weakSelf, responseObject);
-        }
     } failure:^(NSURLRequest *request, NSError *error) {
         weakSelf.endTime = [NSDate date];
         NSNumber *logoutNumber = [weakSelf configLogoutErrorNumber];
@@ -327,7 +264,6 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
         encoding = NSUTF8StringEncoding;
     }
     self.endTime = [NSDate date];
-    NSLog(@"config duration:%f", self.requestDurationTime);
     
     return encoding;
 }
@@ -445,7 +381,8 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
 - (void)logBeforeRequest {
     if ([self configDisplayDebugInfo]) {
         //输出请求内容
-        NSLog(@"url:%@", [self.requestTask.currentRequest.URL absoluteString]);
+        NSLog(@"cookie:%@", [[AEHttpCookieManager sharedManager] getAllCookies]);
+        NSLog(@"url:%@", self.queryString);
         NSLog(@"rest param:%@", self.restfulParam);
         NSLog(@"original param:%@", self.originalParam);
         NSLog(@"query userInfo:%@", [self configRequestUserInfo].infoAppendingAfterQueryString);
@@ -453,6 +390,5 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
         NSLog(@"timeout:%f", [self configTimeoutSeconds]);
     }
 }
-
 
 @end

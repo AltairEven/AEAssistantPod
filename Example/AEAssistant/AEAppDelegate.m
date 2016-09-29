@@ -7,12 +7,28 @@
 //
 
 #import "AEAppDelegate.h"
+#import <AEAssistant/AEAssistant_Network.h>
+
+@interface AEAppDelegate ()
+
+@property (nonatomic, strong) AEHttpRequestHandler *request;
+
+@end
 
 @implementation AEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+//    self.request = [[AEHttpRequestHandler alloc] initWithUrlString:@"https://api-testesports.alisports.com/v1/setting"];
+    self.request = [[AEHttpRequestHandler alloc] initWithUrlString:@"http://www.51zzl.com/images/xxyl/xingge.jpg"];
+    AEHttpRequestConfiguration *config = [AEHttpRequestConfiguration defaultConfiguration];
+    [config setDisplayDebugInfo:YES];
+    [self.request setRequestConfiguration:config];
+    [[AEHttpCookieManager sharedManager] setCookieDomain:@"alisports.com"];
+    [[AEHttpCookieManager sharedManager] setIcsonCookieWithName:@"TestCookieName" andValue:@"TestCookieValue"];
+    
+    
     return YES;
 }
 

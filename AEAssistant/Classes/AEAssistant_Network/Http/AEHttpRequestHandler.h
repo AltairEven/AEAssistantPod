@@ -52,9 +52,6 @@ extern NSString *const kHandledServerResponsedLogoutNotification;
                     success:(void (^)(AEHttpRequestHandler *handler, NSDictionary *responseData))success
                     failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
 
-- (void)downloadImageWithSuccess:(void (^)(AEHttpRequestHandler *handler, UIImage *image))success
-                         failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
-
 - (void)cancelRequest;
 
 @end
