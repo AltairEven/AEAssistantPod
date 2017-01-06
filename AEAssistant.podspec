@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AEAssistant'
-  s.version          = '0.0.2'
-  s.summary          = 'A short description of AEAssistant.'
+s.name             = 'AEAssistant'
+s.version          = '0.0.3'
+s.summary          = 'A short description of AEAssistant.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,28 +17,28 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-                    'This is a pod version for AEAssistant.'
-                    DESC
+s.description      = <<-DESC
+'This is a pod version for AEAssistant.'
+DESC
 
-  s.homepage         = 'http://gitlab.alisports.com/honggang/AEAssistant.git'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Altair' => 'evendipper@163.com' }
-  s.source           = { :git => 'https://github.com/AltairEven/AEAssistantPod.git', :tag => s.version.to_s }
-  
-  s.ios.deployment_target = '8.0'
-  s.source_files = 'AEAssistant/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'AEAssistant' => ['AEAssistant/Assets/*.png']
-  # }
+s.homepage         = 'http://gitlab.alisports.com/honggang/AEAssistant.git'
+s.license          = { :type => 'MIT', :file => 'LICENSE' }
+s.author           = { 'Altair' => 'evendipper@163.com' }
+s.source           = { :git => 'https://github.com/AltairEven/AEAssistantPod.git', :tag => s.version.to_s }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
-  
-    s.dependency 'AFNetworking', '~> 3.1.0'
-    s.dependency 'GTMBase64', '~> 1.0.0'
-    s.dependency 'RegexKitLite', '~> 4.0'
+s.ios.deployment_target = '8.0'
+s.source_files = 'AEAssistant/Classes/**/*'
+
+# s.resource_bundles = {
+#   'AEAssistant' => ['AEAssistant/Assets/*.png']
+# }
+
+# s.public_header_files = 'Pod/Classes/**/*.h'
+# s.frameworks = 'UIKit', 'MapKit'
+# s.dependency 'AFNetworking', '~> 2.3'
+
+s.dependency 'AFNetworking', '~> 3.1.0'
+s.dependency 'GTMBase64', '~> 1.0.0'
+s.dependency 'RegexKitLite', '~> 4.0'
 
 end

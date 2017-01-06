@@ -59,6 +59,8 @@
     [config setRequestUserInfo:[[self requestUserInfo] copy]];
     [config setDisplayDebugInfo:[self displayDebugInfo]];
     [config setValidationBlock:[[self validationBlock] copy]];
+    [config setRequestBeforeBlock:[[self requestBeforeBlock] copy]];
+
 //    [config setRetryCount:[self retryCount]];
     
     return config;

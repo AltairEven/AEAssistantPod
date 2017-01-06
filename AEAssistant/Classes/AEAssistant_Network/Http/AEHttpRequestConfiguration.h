@@ -10,6 +10,7 @@
 #import "AEHttpRequestUserInfo.h"
 
 typedef void(^ NetworkErrorBlcok) (NSError *error);
+typedef NSDictionary *(^ NetworkBeforeRequestBlcok) (NSDictionary *parameter);
 typedef NSError *(^ResponseValidation)(NSDictionary *responseData);
 
 @interface AEHttpRequestConfiguration : NSObject <NSCopying>
@@ -29,6 +30,9 @@ typedef NSError *(^ResponseValidation)(NSDictionary *responseData);
 @property (nonatomic, assign) BOOL displayDebugInfo;
 //返回值验证
 @property (nonatomic, copy) ResponseValidation validationBlock;
+
+@property (nonatomic, copy) NetworkBeforeRequestBlcok requestBeforeBlock;
+
 //重试次数
 //@property (nonatomic, assign) NSUInteger retryCount;
 

@@ -101,6 +101,8 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     __weak typeof(self) weakSelf = self;
     NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
     
+    self.originalParam = [self configRequestBeforeResponse:self.originalParam];
+    
     if (![[AEReachability sharedInstance] isNetworkStatusOK]) {
         NSError *error = [NSError errorWithDomain:@"Http request client. Network status not ok." code:-1 userInfo:nil];
         if (failure) {
@@ -127,6 +129,8 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     NSStringEncoding stringEncoding = [self configStringEncoding];
     [self logBeforeRequest];
     self.startTime = [NSDate date];
+    
+    
     
     self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:weakSelf.originalParam success:^(NSURLRequest *request, id responseObject) {
         weakSelf.endTime = [NSDate date];
@@ -178,6 +182,9 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     if (!data) {
         return;
     }
+    
+    self.originalParam = [self configRequestBeforeResponse:self.originalParam];
+    
     __weak typeof(self) weakSelf = self;
     NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
     
@@ -208,6 +215,8 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     NSStringEncoding stringEncoding = [self configStringEncoding];
     [self logBeforeRequest];
     self.startTime = [NSDate date];
+    
+    
     
     self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:weakSelf.originalParam constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFormData:data name:@"commentImage.jpg"];
@@ -292,6 +301,17 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     NetworkErrorBlcok block = [config errorBlock];
     return block;
 }
+
+
+- (NSDictionary *)configRequestBeforeResponse:(NSDictionary *)respData {
+    AEHttpRequestConfiguration *config = self.requestConfiguration ? self.requestConfiguration : _commonConfig;
+    if (config.requestBeforeBlock) {
+        NSDictionary *parameter = config.requestBeforeBlock(respData);
+        return parameter;
+    }
+    return respData;
+}
+
 
 - (NSError *)configValidResponse:(NSDictionary *)respData {
     AEHttpRequestConfiguration *config = self.requestConfiguration ? self.requestConfiguration : _commonConfig;
