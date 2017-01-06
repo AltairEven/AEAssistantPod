@@ -101,7 +101,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     __weak typeof(self) weakSelf = self;
     NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
     
-    self.originalParam = [self configRequestBeforeResponse:self.originalParam];
+    NSDictionary *signedParameter = [self configRequestBeforeResponse:self.originalParam];
     
     if (![[AEReachability sharedInstance] isNetworkStatusOK]) {
         NSError *error = [NSError errorWithDomain:@"Http request client. Network status not ok." code:-1 userInfo:nil];
@@ -132,7 +132,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     
     
     
-    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:weakSelf.originalParam success:^(NSURLRequest *request, id responseObject) {
+    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:signedParameter  success:^(NSURLRequest *request, id responseObject) {
         weakSelf.endTime = [NSDate date];
         
         if ([weakSelf configDisplayDebugInfo]) {
@@ -183,7 +183,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
         return;
     }
     
-    self.originalParam = [self configRequestBeforeResponse:self.originalParam];
+    NSDictionary *signedParameter = [self configRequestBeforeResponse:self.originalParam];
     
     __weak typeof(self) weakSelf = self;
     NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
@@ -218,7 +218,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     
     
     
-    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:weakSelf.originalParam constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:signedParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFormData:data name:@"commentImage.jpg"];
     } success:^(NSURLRequest *request, id responseObject) {
         
@@ -371,7 +371,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     NSURL *url = [NSURL URLWithString:self.queryString];
     if (!url) {
         return nil;
-    }
+    } 
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     if (!request) {
