@@ -61,7 +61,7 @@
 }
 
 
-+ (NSDictionary*) parsetUrl:(NSString*)urlString {
++ (NSDictionary*)parsetUrl:(NSString*)urlString {
     if ([urlString length] == 0) {
         return nil;
     }
@@ -117,7 +117,7 @@
 }
 
 
-+ (BOOL)copyFileFormBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath {
++ (BOOL)copyFileFromBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath {
     NSFileManager *manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath isDirectory:NULL]) {
         return YES;
@@ -157,6 +157,25 @@
 + (BOOL)hasFirstLaunched {
     BOOL has = [[[NSUserDefaults standardUserDefaults] objectForKey:[AEToolUtil currentAppVersion]] boolValue];
     return has;
+}
+
++ (UIViewController *)topViewController {
+    UIViewController *resultVC = [AEToolUtil topViewControllerOfViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (resultVC.presentedViewController) {
+        resultVC = [AEToolUtil topViewControllerOfViewController:resultVC.presentedViewController];
+    }
+    return resultVC;
+}
+
++ (UIViewController *)topViewControllerOfViewController:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [AEToolUtil topViewControllerOfViewController:[(UINavigationController *)vc topViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [AEToolUtil topViewControllerOfViewController:[(UITabBarController *)vc selectedViewController]];
+    } else {
+        return vc;
+    }
+    return nil;
 }
 
 @end

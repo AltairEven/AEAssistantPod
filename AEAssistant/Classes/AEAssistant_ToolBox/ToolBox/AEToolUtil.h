@@ -48,7 +48,7 @@
             //如果bundle和filePath中都不存在，则返回NO
             //如果bundle中存在，则复制到filePath，并返回拷贝结果。
  */
-+ (BOOL)copyFileFormBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath;
++ (BOOL)copyFileFromBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath;
 /**
  *  当前应用版本号
  *
@@ -73,5 +73,12 @@
  *  @return 是否第一次启动
  */
 + (BOOL)hasFirstLaunched;
+
+/**
+ 获取当前最上层的VC
+
+ @return 当前最上层VC
+ */
++ (UIViewController *)topViewController;
 
 @end

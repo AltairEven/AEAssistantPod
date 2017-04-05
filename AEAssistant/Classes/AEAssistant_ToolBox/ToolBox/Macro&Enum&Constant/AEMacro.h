@@ -9,6 +9,10 @@
 #ifndef AEMacro_h
 #define AEMacro_h
 
+//obj
+#define WeakObject(obj, weakObj) __weak typeof(obj) weakObj = obj;
+#define StrongObject(obj, strongObj) __strong typeof(obj) strongObj = obj;
+
 //log
 #ifdef DEBUG
 #define LOG(...) NSLog(__VA_ARGS__);
@@ -37,7 +41,7 @@
 #define CHANGEWIDTHOFVIEW(view, width) view.frame = CGRectMake(XPOINTOF(view), YPOINTOF(view), width, HEIGHTOF(view))
 #define CHANGEHEIGHTOFVIEW(view, height) view.frame = CGRectMake(XPOINTOF(view), YPOINTOF(view), WIDTHOF(view), height)
 
-#define BORDER_WIDTH (0.5)
+#define BORDER_WIDTH (1 / [UIScreen ])
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 

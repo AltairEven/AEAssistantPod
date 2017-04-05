@@ -85,6 +85,18 @@
 		8D9A97434CFC690EB86E6F01BB9A3465 /* GTMBase64-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7513ACBA8CE14CC53295ADF1AF2B43 /* GTMBase64-dummy.m */; };
 		8D9F505635EA3E07B8B9B017A363CF26 /* ATCountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = EEAB2093394477DFCDE308F83A9F8C5D /* ATCountDown.m */; };
 		8DA304D13B1C0DC9B812B3D742820DDE /* Pods-AEAssistant_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADD5182022D30261B547C7BEBE50988 /* Pods-AEAssistant_Example-dummy.m */; };
+		8F3252831E94961B00D2D594 /* AEGender.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252811E94961B00D2D594 /* AEGender.h */; };
+		8F3252841E94961B00D2D594 /* AEGender.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252821E94961B00D2D594 /* AEGender.m */; };
+		8F3252871E94986E00D2D594 /* AEDateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252851E94986E00D2D594 /* AEDateFormatter.h */; };
+		8F3252881E94986E00D2D594 /* AEDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252861E94986E00D2D594 /* AEDateFormatter.m */; };
+		8F32528B1E949F7400D2D594 /* AELaunchManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252891E949F7400D2D594 /* AELaunchManager.h */; };
+		8F32528C1E949F7400D2D594 /* AELaunchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F32528A1E949F7400D2D594 /* AELaunchManager.m */; };
+		8F32528F1E94B8E800D2D594 /* NSDate+Helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F32528D1E94B8E800D2D594 /* NSDate+Helpers.h */; };
+		8F3252901E94B8E800D2D594 /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F32528E1E94B8E800D2D594 /* NSDate+Helpers.m */; };
+		8F3252961E94BBC200D2D594 /* AESegueService.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252921E94BBC200D2D594 /* AESegueService.h */; };
+		8F3252971E94BBC200D2D594 /* AESegueService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252931E94BBC200D2D594 /* AESegueService.m */; };
+		8F3252981E94BBC200D2D594 /* TextSegueModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252941E94BBC200D2D594 /* TextSegueModel.h */; };
+		8F3252991E94BBC200D2D594 /* TextSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252951E94BBC200D2D594 /* TextSegueModel.m */; };
 		8F4BB8F2854DCDC7AB41B8FF6DB17E5C /* AEEnumeration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC18CAA9B4E133055C9443FBB610752 /* AEEnumeration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F6CDE6AC7C517D9314B57FB4BB659A8 /* AEConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1501A5823D5580F347513894DF2454 /* AEConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8FB0F23604D3C00EB3FA02ADE50E28BD /* AEHttpRequestUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80BD77A6F384DE85829928C42AF31015 /* AEHttpRequestUserInfo.m */; };
@@ -315,6 +327,19 @@
 		8B853109918725797E395E5502D9BABF /* UILabel+Additions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Additions.m"; sourceTree = "<group>"; };
 		8E383B4DCCB96C3C04958F070F1EFA41 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		8EF1D26AE128C1722F2E44A0CB98EB9C /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		8F32527F1E94954400D2D594 /* AEAssistant_Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEAssistant_Model.h; sourceTree = "<group>"; };
+		8F3252811E94961B00D2D594 /* AEGender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEGender.h; sourceTree = "<group>"; };
+		8F3252821E94961B00D2D594 /* AEGender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEGender.m; sourceTree = "<group>"; };
+		8F3252851E94986E00D2D594 /* AEDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDateFormatter.h; sourceTree = "<group>"; };
+		8F3252861E94986E00D2D594 /* AEDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDateFormatter.m; sourceTree = "<group>"; };
+		8F3252891E949F7400D2D594 /* AELaunchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AELaunchManager.h; sourceTree = "<group>"; };
+		8F32528A1E949F7400D2D594 /* AELaunchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AELaunchManager.m; sourceTree = "<group>"; };
+		8F32528D1E94B8E800D2D594 /* NSDate+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helpers.h"; sourceTree = "<group>"; };
+		8F32528E1E94B8E800D2D594 /* NSDate+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helpers.m"; sourceTree = "<group>"; };
+		8F3252921E94BBC200D2D594 /* AESegueService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESegueService.h; sourceTree = "<group>"; };
+		8F3252931E94BBC200D2D594 /* AESegueService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESegueService.m; sourceTree = "<group>"; };
+		8F3252941E94BBC200D2D594 /* TextSegueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextSegueModel.h; sourceTree = "<group>"; };
+		8F3252951E94BBC200D2D594 /* TextSegueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextSegueModel.m; sourceTree = "<group>"; };
 		90EFEA7ECEF969E86EC69E82C3ACA32D /* NSString+UrlEscape.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+UrlEscape.h"; sourceTree = "<group>"; };
 		91BA80B10CD8DCF23CC77E12FC99241F /* Pods-AEAssistant_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AEAssistant_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		91EC62B029A53FEC4F98F740EA174E70 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
@@ -719,6 +744,38 @@
 			);
 			sourceTree = "<group>";
 		};
+		8F32527E1E94951300D2D594 /* AEAssistant_Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F32527F1E94954400D2D594 /* AEAssistant_Model.h */,
+				8F3252801E94959000D2D594 /* CommonModel */,
+				8F3252911E94BBC200D2D594 /* Segue */,
+			);
+			path = AEAssistant_Model;
+			sourceTree = "<group>";
+		};
+		8F3252801E94959000D2D594 /* CommonModel */ = {
+			isa = PBXGroup;
+			children = (
+				8F3252811E94961B00D2D594 /* AEGender.h */,
+				8F3252821E94961B00D2D594 /* AEGender.m */,
+				8F3252851E94986E00D2D594 /* AEDateFormatter.h */,
+				8F3252861E94986E00D2D594 /* AEDateFormatter.m */,
+			);
+			path = CommonModel;
+			sourceTree = "<group>";
+		};
+		8F3252911E94BBC200D2D594 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				8F3252921E94BBC200D2D594 /* AESegueService.h */,
+				8F3252931E94BBC200D2D594 /* AESegueService.m */,
+				8F3252941E94BBC200D2D594 /* TextSegueModel.h */,
+				8F3252951E94BBC200D2D594 /* TextSegueModel.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
 		915B56D81AB82CB09BD31F25221671D4 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +801,8 @@
 				EEAB2093394477DFCDE308F83A9F8C5D /* ATCountDown.m */,
 				982DE7C614CA1155253F1C34CA33E191 /* AUITheme.h */,
 				B2F4968A6EAE921575391C65C7F65B1C /* AUITheme.m */,
+				8F3252891E949F7400D2D594 /* AELaunchManager.h */,
+				8F32528A1E949F7400D2D594 /* AELaunchManager.m */,
 				778ABB5AADABE9E963FF02728228D5F5 /* Macro&Enum&Constant */,
 			);
 			path = ToolBox;
@@ -839,6 +898,8 @@
 				E8A0DFB1D4CAE765D98B98BED4E34301 /* NSDate+CommonDate.m */,
 				8518705620E156E696C6803579AA54F0 /* NSDate+Convertion.h */,
 				87F988FE7B12F44CFD157A0F583ED8BC /* NSDate+Convertion.m */,
+				8F32528D1E94B8E800D2D594 /* NSDate+Helpers.h */,
+				8F32528E1E94B8E800D2D594 /* NSDate+Helpers.m */,
 			);
 			path = NSDate;
 			sourceTree = "<group>";
@@ -937,6 +998,7 @@
 			isa = PBXGroup;
 			children = (
 				D67D7DA36BBBA72338FC54C2AF39EBBA /* AEAssistant_Category */,
+				8F32527E1E94951300D2D594 /* AEAssistant_Model */,
 				0C3D6A60EE6AF5CA60CD0EB1738EA9F9 /* AEAssistant_Network */,
 				C42D17DB9F99736FFD6DA2E1F29862C1 /* AEAssistant_ToolBox */,
 			);
@@ -1028,7 +1090,10 @@
 				5577457A1480EB2443E69CD2FBB60DA0 /* AEHttpRequestUserInfo.h in Headers */,
 				59A32A0B0B581AD978522AC1C805D4C2 /* AEMacro.h in Headers */,
 				01B7D2CF00C7D0AFA95A4C6F20067E59 /* AEReachability.h in Headers */,
+				8F3252961E94BBC200D2D594 /* AESegueService.h in Headers */,
+				8F3252981E94BBC200D2D594 /* TextSegueModel.h in Headers */,
 				6B4B780D3074176FF980DAB057067DED /* AEToolUtil.h in Headers */,
+				8F3252831E94961B00D2D594 /* AEGender.h in Headers */,
 				C8128F9CCB8A1074DEA80EE0CF6FE503 /* AEValidator.h in Headers */,
 				09F5C5A5453B2217A38351E7DED268E2 /* AFHttpRequestWrapper.h in Headers */,
 				978586E8815FEAD49B78F90DFC66CDBA /* ATCountDown.h in Headers */,
@@ -1042,6 +1107,7 @@
 				C03CE439432E13D347F1119A49B74930 /* NSString+Convertion.h in Headers */,
 				CDBB2242B6F2A47CE1A514B7E9915950 /* NSString+DetectEmoji.h in Headers */,
 				8C30E8CC5487B8EE57036B7B2FCCA1DF /* NSString+Hash.h in Headers */,
+				8F32528F1E94B8E800D2D594 /* NSDate+Helpers.h in Headers */,
 				F7F7AE6F82DB6CA97A3B511D40C5E215 /* NSString+Html.h in Headers */,
 				1619CFB6BBABFDDE7CA869D10848608D /* NSString+MD5Addition.h in Headers */,
 				AE006213A5373BFB54FBF9BD9B1216EC /* NSString+StringEncoding.h in Headers */,
@@ -1052,6 +1118,7 @@
 				B23A0D297A7D573AFC0D8F03DD767935 /* UIButton+Color.h in Headers */,
 				AB5DE382288E75A599DB712B99EFCDBF /* UIColor+GColor.h in Headers */,
 				5876FD781BF3A7C6495EC3B9677171AB /* UIDevice+DeviceInfo.h in Headers */,
+				8F3252871E94986E00D2D594 /* AEDateFormatter.h in Headers */,
 				EE10B03BA3602896AE9A84760FC5F39A /* UIDevice+IdentifierAddition.h in Headers */,
 				6B611C9C4837468E1B6F4426D511D743 /* UIImage+GImageExtension.h in Headers */,
 				81534678F7DD13C98AADF85936621166 /* UIImageView+shape.h in Headers */,
@@ -1061,6 +1128,7 @@
 				6C9E310B756207358B29AAED47AFDD27 /* UIView+AutoLayout.h in Headers */,
 				BC486B7F592C44CEE0E41D7945E28B35 /* UIView+Creation.h in Headers */,
 				1FE58CBA27EF82EEBDFF1309DDF46AE4 /* UIView+Nib.h in Headers */,
+				8F32528B1E949F7400D2D594 /* AELaunchManager.h in Headers */,
 				B954F8790089FBC73B685B1D29CC6A4C /* UIView+Rendering.h in Headers */,
 				08F18084A3040CE025E1562854CF37BC /* UIView+Shape.h in Headers */,
 				FEEC5B6DC8E6EE564660D4AF3EDE4707 /* UIView+Snapshot.h in Headers */,
@@ -1307,16 +1375,20 @@
 				16ED010483A99CC652C6024865CFBCFC /* AEReachability.m in Sources */,
 				39B4855119914EE5F03C7524A86349EA /* AEToolUtil.m in Sources */,
 				5BA79D8D1E2C89F391CFD5FB9CDBFAB2 /* AEValidator.m in Sources */,
+				8F32528C1E949F7400D2D594 /* AELaunchManager.m in Sources */,
 				C4150F7EB9D95ED59CCB02C5B1890092 /* AFHttpRequestWrapper.m in Sources */,
 				8D9F505635EA3E07B8B9B017A363CF26 /* ATCountDown.m in Sources */,
+				8F3252901E94B8E800D2D594 /* NSDate+Helpers.m in Sources */,
 				D7E579705A79E57ED5AF2313E6D8927B /* AUITheme.m in Sources */,
 				92C50F0C9F009E6154207F0477617F5E /* InterfaceManager.m in Sources */,
 				689A430536586A6CF44A165D60FDFFDC /* NSAttributedString+Attributes.m in Sources */,
 				AEFFB3E3B28EF3A5E7C5C8870EC6F967 /* NSDate+CommonDate.m in Sources */,
 				373254E2C9CFF425DA44DE0239B8C003 /* NSDate+Convertion.m in Sources */,
 				91785CF77108E3C3797630B22FFD6B53 /* NSString+AES.m in Sources */,
+				8F3252841E94961B00D2D594 /* AEGender.m in Sources */,
 				6FCACCA9B53DE92BB78B4918FA35378E /* NSString+Bounding.m in Sources */,
 				55D0BA3BB7B18EACE4986C24DDDCEA84 /* NSString+Convertion.m in Sources */,
+				8F3252881E94986E00D2D594 /* AEDateFormatter.m in Sources */,
 				BE57B05D3FC5358634DB6429AB3693E5 /* NSString+DetectEmoji.m in Sources */,
 				E06F21B80A518373AF064F4FFE1BB907 /* NSString+Hash.m in Sources */,
 				BF2FB2EB1B9053C0BC6D567BDF38F2CD /* NSString+Html.m in Sources */,
@@ -1334,10 +1406,12 @@
 				0EF305513E06C046283F634E575783EB /* UIImageView+shape.m in Sources */,
 				ECA86288E81833C423CD643BA06D3CB0 /* UILabel+Additions.m in Sources */,
 				60C312A9195069C4C43DFF7C79C1BA23 /* UINavigationBar+BackgroundColor.m in Sources */,
+				8F3252991E94BBC200D2D594 /* TextSegueModel.m in Sources */,
 				3CCA1189626866CFEF37CD2C102DF97F /* UITabBar+Badge.m in Sources */,
 				606C9FC13835A44C6CF91B01FC53F1E1 /* UIView+AutoLayout.m in Sources */,
 				5E4CBB345DB56897F7BD4D56984A758C /* UIView+Creation.m in Sources */,
 				1497894B6F96A98328959109F09E5F66 /* UIView+Nib.m in Sources */,
+				8F3252971E94BBC200D2D594 /* AESegueService.m in Sources */,
 				CB6A8D1842B85DA1C1447BCC26D1120A /* UIView+Rendering.m in Sources */,
 				F91124F151B6C6493A01369AA9571218 /* UIView+Shape.m in Sources */,
 				EC0C698910A0DE58C26C23AA86711BAB /* UIView+Snapshot.m in Sources */,
