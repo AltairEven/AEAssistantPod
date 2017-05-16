@@ -178,8 +178,8 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     [self startHttpRequestWithSuccess:success failure:failure];
 }
 
-- (void)uploadImageWithData:(NSData *)data success:(void (^)(AEHttpRequestHandler *, NSDictionary *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
-    if (!data) {
+- (void)uploadFileWithConstructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))bodyData progress:(void (^)(NSProgress *))progressBlock success:(void (^)(AEHttpRequestHandler *, NSDictionary *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
+    if (!bodyData || ![bodyData conformsToProtocol:@protocol(AFMultipartFormData)]) {
         return;
     }
     
@@ -216,11 +216,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     [self logBeforeRequest];
     self.startTime = [NSDate date];
     
-    
-    
-    self.requestTask = [AFHttpRequestWrapper requestWithUrlRequest:request stringEncoding:stringEncoding parameter:signedParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFormData:data name:@"commentImage.jpg"];
-    } success:^(NSURLRequest *request, id responseObject) {
+    self.requestTask = [AFHttpRequestWrapper uploadFileWithUrlRequest:request stringEncoding:stringEncoding parameter:signedParameter constructingBodyWithBlock:bodyData progress:progressBlock success:^(NSURLRequest *request, id responseObject) {
         
         weakSelf.endTime = [NSDate date];
         
@@ -236,6 +232,71 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
         }
         
         success(weakSelf, responseObject);
+    } failure:^(NSURLRequest *request, NSError *error) {
+        weakSelf.endTime = [NSDate date];
+        NSNumber *logoutNumber = [weakSelf configLogoutErrorNumber];
+        if (logoutNumber && error.code == [logoutNumber integerValue]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHandledServerResponsedLogoutNotification object:error];
+        }
+        if (failure) {
+            failure(weakSelf, error);
+        }
+        if (errorBlock) {
+            errorBlock(error);
+        }
+        if ([weakSelf configDisplayDebugInfo]) {
+            NSLog(@"duratnion:%f, error description:%@", weakSelf.requestDurationTime, [error localizedDescription]);
+        }
+    }];
+    [self.requestTask resume];
+}
+
+- (void)downloadFileToDestination:(NSURL *(^)(NSURL *, NSURLResponse *))destination progress:(void (^)(NSProgress *))progress success:(void (^)(AEHttpRequestHandler *, NSURL *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
+    NSDictionary *signedParameter = [self configRequestBeforeResponse:self.originalParam];
+    
+    __weak typeof(self) weakSelf = self;
+    NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
+    
+    if (![[AEReachability sharedInstance] isNetworkStatusOK]) {
+        NSError *error = [NSError errorWithDomain:@"Http request client. Network status not ok." code:-1 userInfo:nil];
+        if (failure) {
+            failure(weakSelf, error);
+        }
+        if (errorBlock) {
+            errorBlock(error);
+        }
+        return;
+    }
+    if (!self.urlString || [self.urlString isEqualToString:@""]) {
+        NSError *error = [NSError errorWithDomain:@"Http request client. Request content not valid" code:-2 userInfo:nil];
+        if (failure) {
+            failure(weakSelf, error);
+        }
+        if (errorBlock) {
+            errorBlock(error);
+        }
+        return;
+    }
+    
+    //请求时间置零
+    _requestDurationTime = 0;
+    NSURLRequest *request = [self builtHttpRequest];
+    NSStringEncoding stringEncoding = [self configStringEncoding];
+    [self logBeforeRequest];
+    self.startTime = [NSDate date];
+    
+    self.requestTask = [AFHttpRequestWrapper downloadFileWithUrlRequest:request stringEncoding:stringEncoding parameter:signedParameter progress:progress destination:destination success:^(NSURLRequest *request, NSURL *filePath) {
+        
+        weakSelf.endTime = [NSDate date];
+        if (!filePath) {
+            if (failure) {
+                NSError *error = [NSError errorWithDomain:@"Http request client. download failed" code:-3 userInfo:nil];
+                failure(weakSelf, error);
+            }
+            return ;
+        }
+        
+        success(weakSelf, filePath);
     } failure:^(NSURLRequest *request, NSError *error) {
         weakSelf.endTime = [NSDate date];
         NSNumber *logoutNumber = [weakSelf configLogoutErrorNumber];

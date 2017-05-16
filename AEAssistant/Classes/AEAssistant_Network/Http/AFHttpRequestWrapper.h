@@ -28,4 +28,20 @@
                                     success:(void (^)(NSURLRequest *request, id responseObject))success
                                     failure:(void (^)(NSURLRequest *request, NSError *error))failure;
 
++ (NSURLSessionUploadTask *)uploadFileWithUrlRequest:(NSURLRequest *)urlRequest
+                                      stringEncoding:(NSStringEncoding)encoding
+                                           parameter:(NSDictionary *)parameter
+                           constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                                            progress:(void (^) (NSProgress *progress))progressBlock
+                                             success:(void (^)(NSURLRequest *request, id responseObject))success
+                                             failure:(void (^)(NSURLRequest *request, NSError *error))failure;
+
++ (NSURLSessionDownloadTask *)downloadFileWithUrlRequest:(NSURLRequest *)urlRequest
+                                          stringEncoding:(NSStringEncoding)encoding
+                                               parameter:(NSDictionary *)parameter
+                                                progress:(void (^) (NSProgress *progress))progressBlock
+                                             destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                                                 success:(void (^)(NSURLRequest *request, NSURL *filePath))success
+                                                 failure:(void (^)(NSURLRequest *request, NSError *error))failure;
+
 @end

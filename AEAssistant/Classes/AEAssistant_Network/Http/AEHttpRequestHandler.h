@@ -48,9 +48,15 @@ extern NSString *const kHandledServerResponsedLogoutNotification;
                                   success:(void (^)(AEHttpRequestHandler *handler, NSDictionary *responseData))success
                                   failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
 
-- (void)uploadImageWithData:(NSData *)data
-                    success:(void (^)(AEHttpRequestHandler *handler, NSDictionary *responseData))success
-                    failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
+- (void)uploadFileWithConstructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))bodyData
+                                       progress:(void (^) (NSProgress *progress))progressBlock
+                                        success:(void (^)(AEHttpRequestHandler *handler, NSDictionary *responseData))success
+                                        failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
+
+- (void)downloadFileToDestination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination
+                         progress:(void (^) (NSProgress *progress))progress
+                          success:(void (^)(AEHttpRequestHandler *handler, NSURL *filePath))success
+                          failure:(void (^)(AEHttpRequestHandler *handler, NSError *error))failure;
 
 - (void)cancelRequest;
 
