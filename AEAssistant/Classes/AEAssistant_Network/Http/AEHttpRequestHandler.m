@@ -179,13 +179,17 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
 }
 
 - (void)uploadFileWithConstructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))bodyData progress:(void (^)(NSProgress *))progressBlock success:(void (^)(AEHttpRequestHandler *, NSDictionary *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
-    if (!bodyData || ![bodyData conformsToProtocol:@protocol(AFMultipartFormData)]) {
+    __weak typeof(self) weakSelf = self;
+    if (!bodyData) {
+        if (failure) {
+            NSError *error = [NSError errorWithDomain:@"Http request client. No body data." code:-100 userInfo:nil];
+            failure(weakSelf, error);
+        }
         return;
     }
     
     NSDictionary *signedParameter = [self configRequestBeforeResponse:self.originalParam];
     
-    __weak typeof(self) weakSelf = self;
     NetworkErrorBlcok errorBlock = [weakSelf configErrorBlock];
     
     if (![[AEReachability sharedInstance] isNetworkStatusOK]) {
