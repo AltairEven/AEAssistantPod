@@ -97,6 +97,10 @@
 		8F3252971E94BBC200D2D594 /* AESegueService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252931E94BBC200D2D594 /* AESegueService.m */; };
 		8F3252981E94BBC200D2D594 /* TextSegueModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3252941E94BBC200D2D594 /* TextSegueModel.h */; };
 		8F3252991E94BBC200D2D594 /* TextSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3252951E94BBC200D2D594 /* TextSegueModel.m */; };
+		8F35F63F1EF0DAEB007D7D0E /* AEJavaScriptHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F35F63B1EF0DAEB007D7D0E /* AEJavaScriptHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F35F6401EF0DAEB007D7D0E /* AEJavaScriptHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F35F63C1EF0DAEB007D7D0E /* AEJavaScriptHandler.m */; };
+		8F35F6411EF0DAEB007D7D0E /* AEWebViewContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F35F63D1EF0DAEB007D7D0E /* AEWebViewContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F35F6421EF0DAEB007D7D0E /* AEWebViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F35F63E1EF0DAEB007D7D0E /* AEWebViewContainer.m */; };
 		8F4BB8F2854DCDC7AB41B8FF6DB17E5C /* AEEnumeration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC18CAA9B4E133055C9443FBB610752 /* AEEnumeration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F6CDE6AC7C517D9314B57FB4BB659A8 /* AEConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1501A5823D5580F347513894DF2454 /* AEConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8FB0F23604D3C00EB3FA02ADE50E28BD /* AEHttpRequestUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80BD77A6F384DE85829928C42AF31015 /* AEHttpRequestUserInfo.m */; };
@@ -340,6 +344,10 @@
 		8F3252931E94BBC200D2D594 /* AESegueService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESegueService.m; sourceTree = "<group>"; };
 		8F3252941E94BBC200D2D594 /* TextSegueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextSegueModel.h; sourceTree = "<group>"; };
 		8F3252951E94BBC200D2D594 /* TextSegueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextSegueModel.m; sourceTree = "<group>"; };
+		8F35F63B1EF0DAEB007D7D0E /* AEJavaScriptHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEJavaScriptHandler.h; sourceTree = "<group>"; };
+		8F35F63C1EF0DAEB007D7D0E /* AEJavaScriptHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEJavaScriptHandler.m; sourceTree = "<group>"; };
+		8F35F63D1EF0DAEB007D7D0E /* AEWebViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEWebViewContainer.h; sourceTree = "<group>"; };
+		8F35F63E1EF0DAEB007D7D0E /* AEWebViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEWebViewContainer.m; sourceTree = "<group>"; };
 		90EFEA7ECEF969E86EC69E82C3ACA32D /* NSString+UrlEscape.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+UrlEscape.h"; sourceTree = "<group>"; };
 		91BA80B10CD8DCF23CC77E12FC99241F /* Pods-AEAssistant_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AEAssistant_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		91EC62B029A53FEC4F98F740EA174E70 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
@@ -776,6 +784,17 @@
 			path = Segue;
 			sourceTree = "<group>";
 		};
+		8F35F63A1EF0DAEB007D7D0E /* AEAssistant_WebView */ = {
+			isa = PBXGroup;
+			children = (
+				8F35F63B1EF0DAEB007D7D0E /* AEJavaScriptHandler.h */,
+				8F35F63C1EF0DAEB007D7D0E /* AEJavaScriptHandler.m */,
+				8F35F63D1EF0DAEB007D7D0E /* AEWebViewContainer.h */,
+				8F35F63E1EF0DAEB007D7D0E /* AEWebViewContainer.m */,
+			);
+			path = AEAssistant_WebView;
+			sourceTree = "<group>";
+		};
 		915B56D81AB82CB09BD31F25221671D4 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,6 +1016,7 @@
 		E65B205747D9F7802B3903AB9A7E5E1D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8F35F63A1EF0DAEB007D7D0E /* AEAssistant_WebView */,
 				D67D7DA36BBBA72338FC54C2AF39EBBA /* AEAssistant_Category */,
 				8F32527E1E94951300D2D594 /* AEAssistant_Model */,
 				0C3D6A60EE6AF5CA60CD0EB1738EA9F9 /* AEAssistant_Network */,
@@ -1084,6 +1104,7 @@
 				90FE0A7431BE4A097B7E68ABD9B4F1BA /* AEAssistant_ToolBox.h in Headers */,
 				8F6CDE6AC7C517D9314B57FB4BB659A8 /* AEConstant.h in Headers */,
 				8F4BB8F2854DCDC7AB41B8FF6DB17E5C /* AEEnumeration.h in Headers */,
+				8F35F63F1EF0DAEB007D7D0E /* AEJavaScriptHandler.h in Headers */,
 				A198F0D919CEADC17671F5600B4513FD /* AEHttpCookieManager.h in Headers */,
 				E1C7378B7596207B03A33228392246DC /* AEHttpRequestConfiguration.h in Headers */,
 				C0D21F7E3E3171337D1641008C73C365 /* AEHttpRequestHandler.h in Headers */,
@@ -1106,6 +1127,7 @@
 				F39AEABC2058CBF566BE0F1562AAA687 /* NSString+Bounding.h in Headers */,
 				C03CE439432E13D347F1119A49B74930 /* NSString+Convertion.h in Headers */,
 				CDBB2242B6F2A47CE1A514B7E9915950 /* NSString+DetectEmoji.h in Headers */,
+				8F35F6411EF0DAEB007D7D0E /* AEWebViewContainer.h in Headers */,
 				8C30E8CC5487B8EE57036B7B2FCCA1DF /* NSString+Hash.h in Headers */,
 				8F32528F1E94B8E800D2D594 /* NSDate+Helpers.h in Headers */,
 				F7F7AE6F82DB6CA97A3B511D40C5E215 /* NSString+Html.h in Headers */,
@@ -1409,9 +1431,11 @@
 				8F3252991E94BBC200D2D594 /* TextSegueModel.m in Sources */,
 				3CCA1189626866CFEF37CD2C102DF97F /* UITabBar+Badge.m in Sources */,
 				606C9FC13835A44C6CF91B01FC53F1E1 /* UIView+AutoLayout.m in Sources */,
+				8F35F6421EF0DAEB007D7D0E /* AEWebViewContainer.m in Sources */,
 				5E4CBB345DB56897F7BD4D56984A758C /* UIView+Creation.m in Sources */,
 				1497894B6F96A98328959109F09E5F66 /* UIView+Nib.m in Sources */,
 				8F3252971E94BBC200D2D594 /* AESegueService.m in Sources */,
+				8F35F6401EF0DAEB007D7D0E /* AEJavaScriptHandler.m in Sources */,
 				CB6A8D1842B85DA1C1447BCC26D1120A /* UIView+Rendering.m in Sources */,
 				F91124F151B6C6493A01369AA9571218 /* UIView+Shape.m in Sources */,
 				EC0C698910A0DE58C26C23AA86711BAB /* UIView+Snapshot.m in Sources */,
