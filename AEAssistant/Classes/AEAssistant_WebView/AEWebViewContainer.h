@@ -52,8 +52,9 @@ typedef enum {
 @property (nonatomic, weak) id<AEWebviewContainerDelegate> delegate;
 
 //webview methods
-@property (nonatomic, strong, readonly) NSURL *originalUrl;
-@property (nonatomic, strong, readonly) NSURL *currentUrl;
+@property (nonatomic, strong, readonly) NSURLRequest *originalUrlRequest;   //原始请求
+@property (nonatomic, strong, readonly) NSURLRequest *currentUrlRequest;    //当前的请求，即当前shouldStartLoad发起的请求
+@property (nonatomic, strong, readonly) NSURL *currentUrl;  //当前的url
 
 @property (nonatomic, readonly, getter=canGoBack) BOOL canGoBack;
 @property (nonatomic, readonly, getter=canGoForward) BOOL canGoForward;

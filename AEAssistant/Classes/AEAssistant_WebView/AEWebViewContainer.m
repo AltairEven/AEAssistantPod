@@ -16,6 +16,7 @@
 @end
 
 @implementation AEWebViewContainer
+@synthesize currentUrlRequest = _currentUrlRequest;
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
@@ -43,6 +44,29 @@
     }
     _webViewType = webViewType;
     [self setupWebView];
+}
+
+- (NSURLRequest *)currentUrlRequest {
+    NSURLRequest *urlRequest = nil;
+    switch (self.webViewType) {
+        case AEWebViewContainTypeUIWebView:
+        {
+            urlRequest = self.uiWebView.request;
+        }
+            break;
+        case AEWebViewContainTypeWKWebView:
+        {
+            if (_currentUrlRequest) {
+                urlRequest = _currentUrlRequest;
+            } else {
+                urlRequest = [NSURLRequest requestWithURL:self.wkWebView.URL];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return urlRequest;
 }
 
 - (NSURL *)currentUrl {
@@ -156,6 +180,9 @@
     if (decisionHandler) {
         decisionHandler(policy);
     }
+    if (policy == WKNavigationActionPolicyAllow) {
+        _currentUrlRequest = [navigationAction.request copy];
+    }
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
@@ -244,7 +271,7 @@
             }
             [self bringSubviewToFront:self.uiWebView];
             self.uiWebView.delegate = self;
-            [self.uiWebView loadRequest:[NSURLRequest requestWithURL:self.currentUrl ? self.currentUrl : self.originalUrl]];
+            [self.uiWebView loadRequest:self.currentUrlRequest ? self.currentUrlRequest : self.originalUrlRequest];
         }
             break;
         case AEWebViewContainTypeWKWebView:
@@ -272,7 +299,7 @@
             [self bringSubviewToFront:self.wkWebView];
             self.wkWebView.UIDelegate = self;
             self.wkWebView.navigationDelegate = self;
-            [self.wkWebView loadRequest:[NSURLRequest requestWithURL:self.currentUrl ? self.currentUrl : self.originalUrl]];
+            [self.wkWebView loadRequest:self.currentUrlRequest ? self.currentUrlRequest : self.originalUrlRequest];
         }
             break;
         default:
@@ -308,7 +335,7 @@
 #pragma mark Publick methods
 
 - (void)loadRequest:(NSURLRequest *)request {
-    _originalUrl = [request URL];
+    _originalUrlRequest = request;
     switch (self.webViewType) {
         case AEWebViewContainTypeUIWebView:
         {
@@ -343,10 +370,11 @@
 }
 
 - (void)reloadFromOrigin {
+    _currentUrlRequest = nil;
     switch (self.webViewType) {
         case AEWebViewContainTypeUIWebView:
         {
-            [self.uiWebView loadRequest:[NSURLRequest requestWithURL:self.originalUrl]];
+            [self.uiWebView loadRequest:self.originalUrlRequest];
         }
             break;
         case AEWebViewContainTypeWKWebView:
