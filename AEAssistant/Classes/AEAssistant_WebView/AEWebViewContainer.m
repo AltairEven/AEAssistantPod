@@ -474,7 +474,9 @@
             break;
         case AEWebViewContainTypeWKWebView:
         {
-            [self.wkWebView.configuration.websiteDataStore removeDataOfTypes:[WKWebsiteDataStore allWebsiteDataTypes] modifiedSince:[NSDate dateWithTimeIntervalSince1970:0] completionHandler:finished];
+            if (![[[UIDevice currentDevice] systemVersion] hasPrefix:@"8."]) {
+                [self.wkWebView.configuration.websiteDataStore removeDataOfTypes:[WKWebsiteDataStore allWebsiteDataTypes] modifiedSince:[NSDate dateWithTimeIntervalSince1970:0] completionHandler:finished];
+            }
         }
             break;
         default:
