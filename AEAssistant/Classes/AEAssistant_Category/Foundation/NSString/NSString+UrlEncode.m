@@ -42,14 +42,14 @@
 
 - (NSDictionary*)queryParameters
 {
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:3];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     NSString *queryString = [[self componentsSeparatedByString:@"\n"] objectAtIndex:0];
     NSArray *array = [queryString componentsSeparatedByString:@"&"];
     for (NSString *component in array){
         NSArray *pair = [component componentsSeparatedByString:@"="];
         NSString *key = [pair objectAtIndex:0];
         NSString *value = ([pair count] > 1) ? [pair objectAtIndex:1] : @"";
-        [dictionary setValue:[value URLDecodedString] forKey:key];
+        [dictionary setValue:value forKey:key];
     }
     return dictionary;
 }
