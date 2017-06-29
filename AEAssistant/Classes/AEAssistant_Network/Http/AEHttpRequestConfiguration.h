@@ -10,6 +10,7 @@
 #import "AEHttpRequestUserInfo.h"
 
 typedef void(^ NetworkErrorBlcok) (NSError *error);
+typedef void(^ NetworkSuccessBlcok) (NSDictionary *response);
 typedef NSDictionary *(^ NetworkBeforeRequestBlcok) (NSDictionary *parameter);
 typedef NSError *(^ResponseValidation)(NSDictionary *responseData);
 
