@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'AEAssistant'
-s.version          = '0.0.13'
+s.version          = '0.0.14'
 s.summary          = 'A short description of AEAssistant.'
 
 # This description is used to generate tags and improve search results.
@@ -37,8 +37,8 @@ s.source_files = 'AEAssistant/Classes/**/*'
 # s.frameworks = 'UIKit', 'MapKit'
 # s.dependency 'AFNetworking', '~> 2.3'
 
-s.dependency 'AFNetworking', '~> 3.1.0'
-s.dependency 'GTMBase64', '~> 1.0.0'
-s.dependency 'RegexKitLite', '~> 4.0'
+s.dependency 'AFNetworking', '3.1.0'
+s.dependency 'GTMBase64', '1.0.0'
+s.dependency 'RegexKitLite', '4.0'
 
 end
