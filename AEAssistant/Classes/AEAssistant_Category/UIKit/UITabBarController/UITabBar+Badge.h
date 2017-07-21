@@ -10,6 +10,6 @@
 
 @interface UITabBar (Badge)
 
-- (void)setBadgeWithValue:(NSString *)value atIndex:(int)index;
+- (UILabel *)setBadgeWithValue:(NSString *)value atIndex:(int)index;
 
 @end

@@ -13,11 +13,11 @@
 
 @implementation UITabBar (Badge)
 
-- (void)setBadgeWithValue:(NSString *)value atIndex:(int)index {
+- (UILabel *)setBadgeWithValue:(NSString *)value atIndex:(int)index {
     //移除之前的小红点
     [self removeBadgeOnItemIndex:index];
     if (!value || ![value isKindOfClass:[NSString class]]) {
-        return;
+        return nil;
     }
     
     //新建小红点
@@ -28,7 +28,7 @@
     NSUInteger stringLentgh = [value length];
     CGFloat barItemWidth = self.frame.size.width / [self.items count];
     CGFloat barItemRightSide = barItemWidth * (index + 1);
-    if (stringLentgh == 0 || stringLentgh >= 3) {
+    if (stringLentgh == 0) {
         badgeSide = 6;
         CGFloat xPosition = barItemRightSide - badgeSide - rightMargin;
         frame = CGRectMake(xPosition, yPosition, badgeSide, badgeSide);
@@ -40,8 +40,6 @@
     }
     UILabel *badgeLabel = [[UILabel alloc] initWithFrame:frame];
     [badgeLabel setFont:[UIFont systemFontOfSize:10]];
-//    [badgeLabel setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
-//    [badgeLabel setTextColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal];
     [badgeLabel setTextAlignment:NSTextAlignmentCenter];
     [badgeLabel setText:value];
     badgeLabel.tag = BadgeIdexStart + index;
@@ -49,6 +47,7 @@
     badgeLabel.layer.masksToBounds = YES;
     
     [self addSubview:badgeLabel];
+    return badgeLabel;
 }
 
 //移除小红点
