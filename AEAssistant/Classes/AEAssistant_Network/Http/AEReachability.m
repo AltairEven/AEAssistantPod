@@ -8,12 +8,13 @@
 
 #import "AEReachability.h"
 #import <AEAssistant_Network.h>
+#import "AENetworkReachabilityManager.h"
 
 static AEReachability *_sharedManager = nil;
 
 @interface AEReachability ()
 
-@property (nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
+@property (nonatomic, strong) AENetworkReachabilityManager *reachabilityManager;
 
 @end
 
@@ -53,31 +54,31 @@ static AEReachability *_sharedManager = nil;
 {
     //初始化网络状态监控
     if (self.domain && ![self.domain isEqualToString:@""]) {
-        self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain:self.domain];
+        self.reachabilityManager = [AENetworkReachabilityManager managerForDomain:self.domain];
     } else {
-        self.reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+        self.reachabilityManager = [AENetworkReachabilityManager sharedManager];
     }
     [self.reachabilityManager startMonitoring];
     
     __weak typeof(self) weakSelf = self;
-    [weakSelf.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
+    [weakSelf.reachabilityManager setReachabilityStatusChangeBlock:^(AENetworkReachabilityStatus status){
         AENetworkStatus netStatus = AENetworkStatusUnknown;
         switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
+            case AENetworkReachabilityStatusUnknown:
             {
                 _isNetworkStatusOK = NO;
                 _status = AENetworkStatusUnknown;
                 netStatus = AENetworkStatusUnknown;
             }
                 break;
-            case AFNetworkReachabilityStatusNotReachable:
+            case AENetworkReachabilityStatusNotReachable:
             {
                 _isNetworkStatusOK = NO;
                 _status = AENetworkStatusNotReachable;
                 netStatus = AENetworkStatusNotReachable;
             }
                 break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case AENetworkReachabilityStatusReachableViaWWAN:
             {
                 _isNetworkStatusOK = YES;
                 //os version > 7.0
@@ -97,7 +98,7 @@ static AEReachability *_sharedManager = nil;
                 }
             }
                 break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
+            case AENetworkReachabilityStatusReachableViaWiFi:
             {
                 _isNetworkStatusOK = YES;
                 _status = AENetworkStatusReachableViaWiFi;
@@ -118,7 +119,7 @@ static AEReachability *_sharedManager = nil;
 
 - (void)stopNetworkStatusMonitoring
 {
-    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+    [[AENetworkReachabilityManager sharedManager] stopMonitoring];
     
     _isNetworkStatusOK = NO;
 }
