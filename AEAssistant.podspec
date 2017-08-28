@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'AEAssistant'
-s.version          = '0.0.16'
+s.version          = '0.0.17'
 s.summary          = 'A short description of AEAssistant.'
 
 # This description is used to generate tags and improve search results.
