@@ -1,8 +1,11 @@
 PODS:
-  - AEAssistant (0.0.15):
-    - AFNetworking (= 3.1.0)
-    - GTMBase64 (= 1.0.0)
-    - RegexKitLite (= 4.0)
+  - AEAssistant (0.0.18-beyondsports):
+    - AEAssistant/no-arc (= 0.0.18-beyondsports)
+    - AFNetworking
+    - RegexKitLite
+  - AEAssistant/no-arc (0.0.18-beyondsports):
+    - AFNetworking
+    - RegexKitLite
   - AFNetworking (3.1.0):
     - AFNetworking/NSURLSession (= 3.1.0)
     - AFNetworking/Reachability (= 3.1.0)
@@ -18,7 +21,6 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - GTMBase64 (1.0.0)
   - RegexKitLite (4.0)
 
 DEPENDENCIES:
@@ -26,14 +28,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   AEAssistant:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  AEAssistant: e005270eaa4b9fa16a63c51272fea698f3ed08c9
+  AEAssistant: 306b89359701465f4138b5a7dd88a44caff02a8c
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  GTMBase64: 0da7372e95f5171f3f652db38cde6716f8eb5e24
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
 
 PODFILE CHECKSUM: cf52f8e77c7e83167ffe426c56cdcc881f8044d4
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

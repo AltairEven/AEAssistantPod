@@ -23,7 +23,7 @@
 
 #import "NSString+XXTEA.h"
 //#import <AEAssistant_ThirdParty/GTMBase64.h>
-#import "GTMBase64.h"
+#import "ALSGTMBase64.h"
 
 
 typedef uint32_t xxtea_long;
@@ -126,14 +126,14 @@ static char *xxtea_to_byte_array(xxtea_long *data, xxtea_long len, int include_l
     free(v);
     free(k);
     
-    NSString *newstr = [GTMBase64 stringByEncodingBytes:result length:ret_len];
+    NSString *newstr = [ALSGTMBase64 stringByEncodingBytes:result length:ret_len];
     //    NSLog(@"ecncryped neew str is %@",newstr);
     free((void *)result);
     return newstr;
 }
 
 - (NSString *)decryptXXTEA:(NSString *)key {
-    NSData *_data = [GTMBase64 decodeString:self];
+    NSData *_data = [ALSGTMBase64 decodeString:self];
     const unsigned char *data = (const unsigned char *)[_data bytes];
     const unsigned char *strkey = (const unsigned char *)[key UTF8String];
     xxtea_long len = (xxtea_long) strlen((const char *)data);

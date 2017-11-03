@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'AEAssistant'
-s.version          = '0.0.18'
+s.version          = '0.0.18-beyondsports'
 s.summary          = 'A short description of AEAssistant.'
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,18 @@ s.author           = { 'Altair' => 'evendipper@163.com' }
 s.source           = { :git => 'https://github.com/AltairEven/AEAssistantPod.git', :tag => s.version.to_s }
 
 s.ios.deployment_target = '8.0'
+
+non_arc_files = 'AEAssistant/Classes/AEAssistant_ToolBox/ToolBox/ALSGTMBase64/*'
 s.source_files = 'AEAssistant/Classes/**/*'
+s.exclude_files = non_arc_files
+
+s.subspec 'no-arc' do |sp|#一下就是子设置，为需要添加mrc标识的文件进行设置
+
+sp.source_files = non_arc_files
+
+sp.requires_arc = false
+
+end
 
 # s.resource_bundles = {
 #   'AEAssistant' => ['AEAssistant/Assets/*.png']
@@ -37,8 +48,9 @@ s.source_files = 'AEAssistant/Classes/**/*'
 # s.frameworks = 'UIKit', 'MapKit'
 # s.dependency 'AFNetworking', '~> 2.3'
 
+
 s.dependency 'AFNetworking'#, '3.1.0'
-s.dependency 'GTMBase64', '1.0.0'
+#s.dependency 'GTMBase64', '1.0.0'
 s.dependency 'RegexKitLite'#, '4.0'
 
 end

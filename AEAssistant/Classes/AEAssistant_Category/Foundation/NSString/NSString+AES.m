@@ -8,7 +8,7 @@
 
 #import "NSString+AES.h"
 #import <CommonCrypto/CommonCryptor.h>
-#import "GTMBase64.h"
+#import "ALSGTMBase64.h"
 
 @implementation NSString (AES)
 
@@ -46,7 +46,7 @@
 - (NSString *)AES128Operation:(AESOperation)operation withKey:(NSString *)key vector:(NSString *)vector mode:(AEOptions)options {
     NSData *dataIn = [self dataUsingEncoding:NSUTF8StringEncoding];
     if (operation == AESOperationDecrypt) {
-        dataIn = [GTMBase64 decodeData:dataIn];
+        dataIn = [ALSGTMBase64 decodeData:dataIn];
     }
     NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
     NSData *ivData = [vector dataUsingEncoding:NSUTF8StringEncoding];

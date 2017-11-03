@@ -53,6 +53,7 @@
 #import "AEHttpRequestConfiguration.h"
 #import "AEHttpRequestHandler.h"
 #import "AEHttpRequestUserInfo.h"
+#import "AENetworkReachabilityManager.h"
 #import "AEReachability.h"
 #import "AFHttpRequestWrapper.h"
 #import "InterfaceManager.h"
@@ -67,6 +68,8 @@
 #import "AEMacro.h"
 #import "AEJavaScriptHandler.h"
 #import "AEWebViewContainer.h"
+#import "ALSGTMBase64.h"
+#import "ALSGTMDefines.h"
 
 FOUNDATION_EXPORT double AEAssistantVersionNumber;
 FOUNDATION_EXPORT const unsigned char AEAssistantVersionString[];

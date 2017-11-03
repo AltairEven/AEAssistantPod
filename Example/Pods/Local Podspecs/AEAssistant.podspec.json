@@ -1,6 +1,6 @@
 {
   "name": "AEAssistant",
-  "version": "0.0.15",
+  "version": "0.0.18-beyondsports",
   "summary": "A short description of AEAssistant.",
   "description": "'This is a pod version for AEAssistant.'",
   "homepage": "http://gitlab.alisports.com/honggang/AEAssistant.git",
@@ -13,21 +13,26 @@
   },
   "source": {
     "git": "https://github.com/AltairEven/AEAssistantPod.git",
-    "tag": "0.0.15"
+    "tag": "0.0.18-beyondsports"
   },
   "platforms": {
     "ios": "8.0"
   },
   "source_files": "AEAssistant/Classes/**/*",
+  "exclude_files": "AEAssistant/Classes/AEAssistant_ToolBox/ToolBox/ALSGTMBase64/*",
   "dependencies": {
     "AFNetworking": [
-      "3.1.0"
-    ],
-    "GTMBase64": [
-      "1.0.0"
+
     ],
     "RegexKitLite": [
-      "4.0"
+
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "no-arc",
+      "source_files": "AEAssistant/Classes/AEAssistant_ToolBox/ToolBox/ALSGTMBase64/*",
+      "requires_arc": false
+    }
+  ]
 }
