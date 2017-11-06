@@ -68,6 +68,13 @@
 #import "AEMacro.h"
 #import "AEJavaScriptHandler.h"
 #import "AEWebViewContainer.h"
+#import "AE_AFHTTPSessionManager.h"
+#import "AE_AFNetworking.h"
+#import "AE_AFNetworkReachabilityManager.h"
+#import "AE_AFSecurityPolicy.h"
+#import "AE_AFURLRequestSerialization.h"
+#import "AE_AFURLResponseSerialization.h"
+#import "AE_AFURLSessionManager.h"
 #import "ALSGTMBase64.h"
 #import "ALSGTMDefines.h"
 

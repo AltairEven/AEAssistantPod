@@ -21,9 +21,6 @@
   "source_files": "AEAssistant/Classes/**/*",
   "exclude_files": "AEAssistant/Classes/AEAssistant_ToolBox/ToolBox/ALSGTMBase64/*",
   "dependencies": {
-    "AFNetworking": [
-
-    ],
     "RegexKitLite": [
 
     ]

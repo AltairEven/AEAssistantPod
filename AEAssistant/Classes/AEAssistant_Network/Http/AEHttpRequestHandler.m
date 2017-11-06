@@ -178,7 +178,7 @@ static AEHttpRequestConfiguration *_commonConfig = nil;
     [self startHttpRequestWithSuccess:success failure:failure];
 }
 
-- (void)uploadFileWithConstructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))bodyData progress:(void (^)(NSProgress *))progressBlock success:(void (^)(AEHttpRequestHandler *, NSDictionary *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
+- (void)uploadFileWithConstructingBodyWithBlock:(void (^)(id<AE_AFMultipartFormData>))bodyData progress:(void (^)(NSProgress *))progressBlock success:(void (^)(AEHttpRequestHandler *, NSDictionary *))success failure:(void (^)(AEHttpRequestHandler *, NSError *))failure {
     __weak typeof(self) weakSelf = self;
     if (!bodyData) {
         if (failure) {

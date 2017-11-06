@@ -12,7 +12,7 @@
 
 + (NSURLSessionTask *)requestWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter success:(void (^)(NSURLRequest *, id))success failure:(void (^)(NSURLRequest *, NSError *))failure {
     //session
-    AFHTTPSessionManager   *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+    AE_AFHTTPSessionManager   *sessionManager = [[AE_AFHTTPSessionManager alloc] initWithBaseURL:nil];
     //request
     sessionManager.requestSerializer.timeoutInterval = urlRequest.timeoutInterval;
     sessionManager.requestSerializer.stringEncoding = encoding;
@@ -39,7 +39,7 @@
     request.allHTTPHeaderFields = urlRequest.allHTTPHeaderFields;
     //response
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
-    [(AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
+    [(AE_AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
     //task
     NSURLSessionTask *task = [sessionManager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
@@ -55,9 +55,9 @@
     return task;
 }
 
-+ (NSURLSessionTask *)requestWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(NSURLRequest *, id))success failure:(void (^)(NSURLRequest *, NSError *))failure {
++ (NSURLSessionTask *)requestWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter constructingBodyWithBlock:(void (^)(id<AE_AFMultipartFormData>))block success:(void (^)(NSURLRequest *, id))success failure:(void (^)(NSURLRequest *, NSError *))failure {
     //session
-    AFHTTPSessionManager   *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+    AE_AFHTTPSessionManager   *sessionManager = [[AE_AFHTTPSessionManager alloc] initWithBaseURL:nil];
     //request
     sessionManager.requestSerializer.timeoutInterval = urlRequest.timeoutInterval;
     sessionManager.requestSerializer.stringEncoding = encoding;
@@ -84,7 +84,7 @@
     
     //response
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
-    [(AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
+    [(AE_AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
     //task
     NSURLSessionTask *task = [sessionManager dataTaskWithRequest:mRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
@@ -100,9 +100,9 @@
     return task;
 }
 
-+ (NSURLSessionUploadTask *)uploadFileWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block progress:(void (^)(NSProgress *))progressBlock success:(void (^)(NSURLRequest *, id))success failure:(void (^)(NSURLRequest *, NSError *))failure {
++ (NSURLSessionUploadTask *)uploadFileWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter constructingBodyWithBlock:(void (^)(id<AE_AFMultipartFormData>))block progress:(void (^)(NSProgress *))progressBlock success:(void (^)(NSURLRequest *, id))success failure:(void (^)(NSURLRequest *, NSError *))failure {
     //session
-    AFHTTPSessionManager   *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+    AE_AFHTTPSessionManager   *sessionManager = [[AE_AFHTTPSessionManager alloc] initWithBaseURL:nil];
     //request
     sessionManager.requestSerializer.timeoutInterval = urlRequest.timeoutInterval;
     sessionManager.requestSerializer.stringEncoding = encoding;
@@ -129,7 +129,7 @@
     
     //response
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
-    [(AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
+    [(AE_AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
     //task
     NSURLSessionUploadTask *task = [sessionManager uploadTaskWithRequest:mRequest fromData:nil progress:progressBlock completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
@@ -147,7 +147,7 @@
 
 + (NSURLSessionDownloadTask *)downloadFileWithUrlRequest:(NSURLRequest *)urlRequest stringEncoding:(NSStringEncoding)encoding parameter:(NSDictionary *)parameter progress:(void (^)(NSProgress *))progressBlock destination:(nullable NSURL *(^)(NSURL *, NSURLResponse *))destination success:(void (^)(NSURLRequest *, NSURL *))success failure:(void (^)(NSURLRequest *, NSError *))failure {
     //session
-    AFHTTPSessionManager   *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+    AE_AFHTTPSessionManager   *sessionManager = [[AE_AFHTTPSessionManager alloc] initWithBaseURL:nil];
     //request
     sessionManager.requestSerializer.timeoutInterval = urlRequest.timeoutInterval;
     sessionManager.requestSerializer.stringEncoding = encoding;
@@ -174,7 +174,7 @@
     
     //response
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
-    [(AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
+    [(AE_AFJSONResponseSerializer *)sessionManager.responseSerializer setRemovesKeysWithNullValues:YES];
     //task
     NSURLSessionDownloadTask *task = [sessionManager downloadTaskWithRequest:mRequest progress:progressBlock destination:destination completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         if (error) {
