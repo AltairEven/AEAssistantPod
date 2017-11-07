@@ -1,8 +1,8 @@
 PODS:
-  - AEAssistant (0.0.18-beyondsports):
-    - AEAssistant/no-arc (= 0.0.18-beyondsports)
+  - AEAssistant (0.0.18.1-beyondsports):
+    - AEAssistant/no-arc (= 0.0.18.1-beyondsports)
     - RegexKitLite
-  - AEAssistant/no-arc (0.0.18-beyondsports):
+  - AEAssistant/no-arc (0.0.18.1-beyondsports):
     - RegexKitLite
   - RegexKitLite (4.0)
 
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AEAssistant: 25abc950c710104cac82e0dc60017c97923e468f
+  AEAssistant: 0e7338ec09bbe19f0e01fdc92556881664852250
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
 
 PODFILE CHECKSUM: cf52f8e77c7e83167ffe426c56cdcc881f8044d4

@@ -45,11 +45,11 @@ typedef NSString * (^AFQueryStringSerializationBlock)(NSURLRequest *request, id 
     - returns: The percent-escaped string.
  */
 NSString * AE_AFPercentEscapedStringFromString(NSString *string) {
-    static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
-    static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
+    static NSString * const kAE_AFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
+    static NSString * const kAE_AFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
 
     NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-    [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
+    [allowedCharacterSet removeCharactersInString:[kAE_AFCharactersGeneralDelimitersToEncode stringByAppendingString:kAE_AFCharactersSubDelimitersToEncode]];
 
 	// FIXME: https://github.com/AFNetworking/AFNetworking/pull/3028
     // return [string stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
@@ -81,7 +81,7 @@ NSString * AE_AFPercentEscapedStringFromString(NSString *string) {
 
 #pragma mark -
 
-@interface AFQueryStringPair : NSObject
+@interface AE_AFQueryStringPair : NSObject
 @property (readwrite, nonatomic, strong) id field;
 @property (readwrite, nonatomic, strong) id value;
 
@@ -90,7 +90,7 @@ NSString * AE_AFPercentEscapedStringFromString(NSString *string) {
 - (NSString *)URLEncodedStringValue;
 @end
 
-@implementation AFQueryStringPair
+@implementation AE_AFQueryStringPair
 
 - (instancetype)initWithField:(id)field value:(id)value {
     self = [super init];
@@ -116,23 +116,23 @@ NSString * AE_AFPercentEscapedStringFromString(NSString *string) {
 
 #pragma mark -
 
-FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
-FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
+FOUNDATION_EXPORT NSArray * AE_AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
+FOUNDATION_EXPORT NSArray * AE_AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
 NSString * AE_AFQueryStringFromParameters(NSDictionary *parameters) {
     NSMutableArray *mutablePairs = [NSMutableArray array];
-    for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
+    for (AE_AFQueryStringPair *pair in AE_AFQueryStringPairsFromDictionary(parameters)) {
         [mutablePairs addObject:[pair URLEncodedStringValue]];
     }
 
     return [mutablePairs componentsJoinedByString:@"&"];
 }
 
-NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary) {
-    return AFQueryStringPairsFromKeyAndValue(nil, dictionary);
+NSArray * AE_AFQueryStringPairsFromDictionary(NSDictionary *dictionary) {
+    return AE_AFQueryStringPairsFromKeyAndValue(nil, dictionary);
 }
 
-NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
+NSArray * AE_AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
     NSMutableArray *mutableQueryStringComponents = [NSMutableArray array];
 
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES selector:@selector(compare:)];
@@ -143,21 +143,21 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
         for (id nestedKey in [dictionary.allKeys sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
             id nestedValue = dictionary[nestedKey];
             if (nestedValue) {
-                [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
+                [mutableQueryStringComponents addObjectsFromArray:AE_AFQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
             }
         }
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *array = value;
         for (id nestedValue in array) {
-            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
+            [mutableQueryStringComponents addObjectsFromArray:AE_AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
         }
     } else if ([value isKindOfClass:[NSSet class]]) {
         NSSet *set = value;
         for (id obj in [set sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
-            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue(key, obj)];
+            [mutableQueryStringComponents addObjectsFromArray:AE_AFQueryStringPairsFromKeyAndValue(key, obj)];
         }
     } else {
-        [mutableQueryStringComponents addObject:[[AFQueryStringPair alloc] initWithField:key value:value]];
+        [mutableQueryStringComponents addObject:[[AE_AFQueryStringPair alloc] initWithField:key value:value]];
     }
 
     return mutableQueryStringComponents;
@@ -165,7 +165,7 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 
 #pragma mark -
 
-@interface AFStreamingMultipartFormData : NSObject <AE_AFMultipartFormData>
+@interface AE_AFStreamingMultipartFormData : NSObject <AE_AFMultipartFormData>
 - (instancetype)initWithURLRequest:(NSMutableURLRequest *)urlRequest
                     stringEncoding:(NSStringEncoding)encoding;
 
@@ -381,10 +381,10 @@ forHTTPHeaderField:(NSString *)field
 
     NSMutableURLRequest *mutableRequest = [self requestWithMethod:method URLString:URLString parameters:nil error:error];
 
-    __block AFStreamingMultipartFormData *formData = [[AFStreamingMultipartFormData alloc] initWithURLRequest:mutableRequest stringEncoding:NSUTF8StringEncoding];
+    __block AE_AFStreamingMultipartFormData *formData = [[AE_AFStreamingMultipartFormData alloc] initWithURLRequest:mutableRequest stringEncoding:NSUTF8StringEncoding];
 
     if (parameters) {
-        for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
+        for (AE_AFQueryStringPair *pair in AE_AFQueryStringPairsFromDictionary(parameters)) {
             NSData *data = nil;
             if ([pair.value isKindOfClass:[NSData class]]) {
                 data = pair.value;
@@ -579,25 +579,25 @@ forHTTPHeaderField:(NSString *)field
 
 #pragma mark -
 
-static NSString * AFCreateMultipartFormBoundary() {
+static NSString * AE_AFCreateMultipartFormBoundary() {
     return [NSString stringWithFormat:@"Boundary+%08X%08X", arc4random(), arc4random()];
 }
 
 static NSString * const kAFMultipartFormCRLF = @"\r\n";
 
-static inline NSString * AFMultipartFormInitialBoundary(NSString *boundary) {
+static inline NSString * AE_AFMultipartFormInitialBoundary(NSString *boundary) {
     return [NSString stringWithFormat:@"--%@%@", boundary, kAFMultipartFormCRLF];
 }
 
-static inline NSString * AFMultipartFormEncapsulationBoundary(NSString *boundary) {
+static inline NSString * AE_AFMultipartFormEncapsulationBoundary(NSString *boundary) {
     return [NSString stringWithFormat:@"%@--%@%@", kAFMultipartFormCRLF, boundary, kAFMultipartFormCRLF];
 }
 
-static inline NSString * AFMultipartFormFinalBoundary(NSString *boundary) {
+static inline NSString * AE_AFMultipartFormFinalBoundary(NSString *boundary) {
     return [NSString stringWithFormat:@"%@--%@--%@", kAFMultipartFormCRLF, boundary, kAFMultipartFormCRLF];
 }
 
-static inline NSString * AFContentTypeForPathExtension(NSString *extension) {
+static inline NSString * AE_AFContentTypeForPathExtension(NSString *extension) {
     NSString *UTI = (__bridge_transfer NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)extension, NULL);
     NSString *contentType = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)UTI, kUTTagClassMIMEType);
     if (!contentType) {
@@ -610,7 +610,7 @@ static inline NSString * AFContentTypeForPathExtension(NSString *extension) {
 NSUInteger const kAE_AFUploadStream3GSuggestedPacketSize = 1024 * 16;
 NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 
-@interface AFHTTPBodyPart : NSObject
+@interface AE_AFHTTPBodyPart : NSObject
 @property (nonatomic, assign) NSStringEncoding stringEncoding;
 @property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, copy) NSString *boundary;
@@ -628,7 +628,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
         maxLength:(NSUInteger)length;
 @end
 
-@interface AFMultipartBodyStream : NSInputStream <NSStreamDelegate>
+@interface AE_AFMultipartBodyStream : NSInputStream <NSStreamDelegate>
 @property (nonatomic, assign) NSUInteger numberOfBytesInPacket;
 @property (nonatomic, assign) NSTimeInterval delay;
 @property (nonatomic, strong) NSInputStream *inputStream;
@@ -637,19 +637,19 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 
 - (instancetype)initWithStringEncoding:(NSStringEncoding)encoding;
 - (void)setInitialAndFinalBoundaries;
-- (void)appendHTTPBodyPart:(AFHTTPBodyPart *)bodyPart;
+- (void)appendHTTPBodyPart:(AE_AFHTTPBodyPart *)bodyPart;
 @end
 
 #pragma mark -
 
-@interface AFStreamingMultipartFormData ()
+@interface AE_AFStreamingMultipartFormData ()
 @property (readwrite, nonatomic, copy) NSMutableURLRequest *request;
 @property (readwrite, nonatomic, assign) NSStringEncoding stringEncoding;
 @property (readwrite, nonatomic, copy) NSString *boundary;
-@property (readwrite, nonatomic, strong) AFMultipartBodyStream *bodyStream;
+@property (readwrite, nonatomic, strong) AE_AFMultipartBodyStream *bodyStream;
 @end
 
-@implementation AFStreamingMultipartFormData
+@implementation AE_AFStreamingMultipartFormData
 
 - (instancetype)initWithURLRequest:(NSMutableURLRequest *)urlRequest
                     stringEncoding:(NSStringEncoding)encoding
@@ -661,8 +661,8 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 
     self.request = urlRequest;
     self.stringEncoding = encoding;
-    self.boundary = AFCreateMultipartFormBoundary();
-    self.bodyStream = [[AFMultipartBodyStream alloc] initWithStringEncoding:encoding];
+    self.boundary = AE_AFCreateMultipartFormBoundary();
+    self.bodyStream = [[AE_AFMultipartBodyStream alloc] initWithStringEncoding:encoding];
 
     return self;
 }
@@ -675,7 +675,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
     NSParameterAssert(name);
 
     NSString *fileName = [fileURL lastPathComponent];
-    NSString *mimeType = AFContentTypeForPathExtension([fileURL pathExtension]);
+    NSString *mimeType = AE_AFContentTypeForPathExtension([fileURL pathExtension]);
 
     return [self appendPartWithFileURL:fileURL name:name fileName:fileName mimeType:mimeType error:error];
 }
@@ -716,7 +716,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
     [mutableHeaders setValue:[NSString stringWithFormat:@"form-data; name=\"%@\"; filename=\"%@\"", name, fileName] forKey:@"Content-Disposition"];
     [mutableHeaders setValue:mimeType forKey:@"Content-Type"];
 
-    AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
+    AE_AFHTTPBodyPart *bodyPart = [[AE_AFHTTPBodyPart alloc] init];
     bodyPart.stringEncoding = self.stringEncoding;
     bodyPart.headers = mutableHeaders;
     bodyPart.boundary = self.boundary;
@@ -741,7 +741,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
     [mutableHeaders setValue:[NSString stringWithFormat:@"form-data; name=\"%@\"; filename=\"%@\"", name, fileName] forKey:@"Content-Disposition"];
     [mutableHeaders setValue:mimeType forKey:@"Content-Type"];
 
-    AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
+    AE_AFHTTPBodyPart *bodyPart = [[AE_AFHTTPBodyPart alloc] init];
     bodyPart.stringEncoding = self.stringEncoding;
     bodyPart.headers = mutableHeaders;
     bodyPart.boundary = self.boundary;
@@ -784,7 +784,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 {
     NSParameterAssert(body);
 
-    AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
+    AE_AFHTTPBodyPart *bodyPart = [[AE_AFHTTPBodyPart alloc] init];
     bodyPart.stringEncoding = self.stringEncoding;
     bodyPart.headers = headers;
     bodyPart.boundary = self.boundary;
@@ -825,16 +825,16 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 @property (readwrite, copy) NSError *streamError;
 @end
 
-@interface AFMultipartBodyStream () <NSCopying>
+@interface AE_AFMultipartBodyStream () <NSCopying>
 @property (readwrite, nonatomic, assign) NSStringEncoding stringEncoding;
 @property (readwrite, nonatomic, strong) NSMutableArray *HTTPBodyParts;
 @property (readwrite, nonatomic, strong) NSEnumerator *HTTPBodyPartEnumerator;
-@property (readwrite, nonatomic, strong) AFHTTPBodyPart *currentHTTPBodyPart;
+@property (readwrite, nonatomic, strong) AE_AFHTTPBodyPart *currentHTTPBodyPart;
 @property (readwrite, nonatomic, strong) NSOutputStream *outputStream;
 @property (readwrite, nonatomic, strong) NSMutableData *buffer;
 @end
 
-@implementation AFMultipartBodyStream
+@implementation AE_AFMultipartBodyStream
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wimplicit-atomic-properties"
 #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1100)
@@ -859,7 +859,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 
 - (void)setInitialAndFinalBoundaries {
     if ([self.HTTPBodyParts count] > 0) {
-        for (AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
+        for (AE_AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
             bodyPart.hasInitialBoundary = NO;
             bodyPart.hasFinalBoundary = NO;
         }
@@ -869,7 +869,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
     }
 }
 
-- (void)appendHTTPBodyPart:(AFHTTPBodyPart *)bodyPart {
+- (void)appendHTTPBodyPart:(AE_AFHTTPBodyPart *)bodyPart {
     [self.HTTPBodyParts addObject:bodyPart];
 }
 
@@ -962,7 +962,7 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 
 - (unsigned long long)contentLength {
     unsigned long long length = 0;
-    for (AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
+    for (AE_AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
         length += [bodyPart contentLength];
     }
 
@@ -988,9 +988,9 @@ NSTimeInterval const kAE_AFUploadStream3GSuggestedDelay = 0.2;
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    AFMultipartBodyStream *bodyStreamCopy = [[[self class] allocWithZone:zone] initWithStringEncoding:self.stringEncoding];
+    AE_AFMultipartBodyStream *bodyStreamCopy = [[[self class] allocWithZone:zone] initWithStringEncoding:self.stringEncoding];
 
-    for (AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
+    for (AE_AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
         [bodyStreamCopy appendHTTPBodyPart:[bodyPart copy]];
     }
 
@@ -1008,10 +1008,10 @@ typedef enum {
     AFHeaderPhase                = 2,
     AFBodyPhase                  = 3,
     AFFinalBoundaryPhase         = 4,
-} AFHTTPBodyPartReadPhase;
+} AE_AFHTTPBodyPartReadPhase;
 
-@interface AFHTTPBodyPart () <NSCopying> {
-    AFHTTPBodyPartReadPhase _phase;
+@interface AE_AFHTTPBodyPart () <NSCopying> {
+    AE_AFHTTPBodyPartReadPhase _phase;
     NSInputStream *_inputStream;
     unsigned long long _phaseReadOffset;
 }
@@ -1022,7 +1022,7 @@ typedef enum {
             maxLength:(NSUInteger)length;
 @end
 
-@implementation AFHTTPBodyPart
+@implementation AE_AFHTTPBodyPart
 
 - (instancetype)init {
     self = [super init];
@@ -1071,7 +1071,7 @@ typedef enum {
 - (unsigned long long)contentLength {
     unsigned long long length = 0;
 
-    NSData *encapsulationBoundaryData = [([self hasInitialBoundary] ? AFMultipartFormInitialBoundary(self.boundary) : AFMultipartFormEncapsulationBoundary(self.boundary)) dataUsingEncoding:self.stringEncoding];
+    NSData *encapsulationBoundaryData = [([self hasInitialBoundary] ? AE_AFMultipartFormInitialBoundary(self.boundary) : AE_AFMultipartFormEncapsulationBoundary(self.boundary)) dataUsingEncoding:self.stringEncoding];
     length += [encapsulationBoundaryData length];
 
     NSData *headersData = [[self stringForHeaders] dataUsingEncoding:self.stringEncoding];
@@ -1079,14 +1079,14 @@ typedef enum {
 
     length += _bodyContentLength;
 
-    NSData *closingBoundaryData = ([self hasFinalBoundary] ? [AFMultipartFormFinalBoundary(self.boundary) dataUsingEncoding:self.stringEncoding] : [NSData data]);
+    NSData *closingBoundaryData = ([self hasFinalBoundary] ? [AE_AFMultipartFormFinalBoundary(self.boundary) dataUsingEncoding:self.stringEncoding] : [NSData data]);
     length += [closingBoundaryData length];
 
     return length;
 }
 
 - (BOOL)hasBytesAvailable {
-    // Allows `read:maxLength:` to be called again if `AFMultipartFormFinalBoundary` doesn't fit into the available buffer
+    // Allows `read:maxLength:` to be called again if `AE_AFMultipartFormFinalBoundary` doesn't fit into the available buffer
     if (_phase == AFFinalBoundaryPhase) {
         return YES;
     }
@@ -1115,7 +1115,7 @@ typedef enum {
     NSInteger totalNumberOfBytesRead = 0;
 
     if (_phase == AFEncapsulationBoundaryPhase) {
-        NSData *encapsulationBoundaryData = [([self hasInitialBoundary] ? AFMultipartFormInitialBoundary(self.boundary) : AFMultipartFormEncapsulationBoundary(self.boundary)) dataUsingEncoding:self.stringEncoding];
+        NSData *encapsulationBoundaryData = [([self hasInitialBoundary] ? AE_AFMultipartFormInitialBoundary(self.boundary) : AE_AFMultipartFormEncapsulationBoundary(self.boundary)) dataUsingEncoding:self.stringEncoding];
         totalNumberOfBytesRead += [self readData:encapsulationBoundaryData intoBuffer:&buffer[totalNumberOfBytesRead] maxLength:(length - (NSUInteger)totalNumberOfBytesRead)];
     }
 
@@ -1140,7 +1140,7 @@ typedef enum {
     }
 
     if (_phase == AFFinalBoundaryPhase) {
-        NSData *closingBoundaryData = ([self hasFinalBoundary] ? [AFMultipartFormFinalBoundary(self.boundary) dataUsingEncoding:self.stringEncoding] : [NSData data]);
+        NSData *closingBoundaryData = ([self hasFinalBoundary] ? [AE_AFMultipartFormFinalBoundary(self.boundary) dataUsingEncoding:self.stringEncoding] : [NSData data]);
         totalNumberOfBytesRead += [self readData:closingBoundaryData intoBuffer:&buffer[totalNumberOfBytesRead] maxLength:(length - (NSUInteger)totalNumberOfBytesRead)];
     }
 
@@ -1203,7 +1203,7 @@ typedef enum {
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    AFHTTPBodyPart *bodyPart = [[[self class] allocWithZone:zone] init];
+    AE_AFHTTPBodyPart *bodyPart = [[[self class] allocWithZone:zone] init];
 
     bodyPart.stringEncoding = self.stringEncoding;
     bodyPart.headers = self.headers;
